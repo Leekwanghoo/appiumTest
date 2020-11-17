@@ -1,0 +1,40 @@
+import unittest
+import os
+from appium import webdriver
+from time import sleep
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+from appium.webdriver.common.touch_action import TouchAction
+
+
+class KakaoGameSDKLoginOutTest(unittest.TestCase):
+
+    def setUp(self):
+        # Google calendar SDK Test App 경로
+        app = os.path.join(os.path.dirname(__file__), 'C:\\Test_Appium\\GoogleCalendar',
+                           'com.google.android.calendar_apkmirror.com.apk')
+        app = os.path.abspath(app)
+
+        # Set up appium
+        # Appium 서버의 포트는 4001로 지정합니다.
+        # 그리고 desired_capabilities에 연결하려는 디바이스(V10)의 정보를 넣습니다.
+        self.driver = webdriver.Remote(
+            command_executor='http://127.0.0.1:4001/wd/hub',
+            desired_capabilities={
+                'app': app,
+                'platformName': 'Android',
+                'platformVersion': '6.0',
+                'deviceName': 'Galaxy S9',
+                'automationName': 'Appium',
+                'udid': '228822820f017ece'
+            })
+
+    def test_search_field(self):
+        # appiun의 webdriver를 초기화 합니다.
+        driver = self.driver
+
+        # selenium의 WebDriverWait을 사용합니다. element가 나올때 까지 최고 20초까지 기다립니다.
+        wait = WebDriverWait(driver, 20)
+
